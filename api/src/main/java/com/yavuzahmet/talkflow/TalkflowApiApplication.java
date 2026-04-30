@@ -1,0 +1,13 @@
+package com.yavuzahmet.talkflow;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TalkflowApiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(TalkflowApiApplication.class, args);
+	}
+
+}
