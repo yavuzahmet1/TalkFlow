@@ -1,0 +1,17 @@
+# --- SECURITY (SECRETS) ---
+.env
+.env.*
+*.secret
+
+# --- OS JUNK FILES ---
+.DS_Store
+Thumbs.db
+
+# --- EDITOR/IDE SETTINGS ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
