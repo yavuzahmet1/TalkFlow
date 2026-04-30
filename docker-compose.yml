@@ -1,0 +1,40 @@
+services:
+  # 1. Database Service
+  postgres:
+    container_name: postgres-sql-talkflow
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - talkflow
+    restart: unless-stopped
+
+  # 2. Authorize
+  keycloak:
+    container_name: keycloak-talkflow
+    image: quay.io/keycloak/keycloak:26.0.0
+    ports:
+      - "9090:8080"
+    environment:
+      KEYCLOAK_ADMIN: ${KC_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KC_ADMIN_PASSWORD}
+    networks:
+      - talkflow
+    command:
+      - "start-dev"
+
+# network
+networks:
+  talkflow:
+    driver: bridge
+
+# volume
+volumes:
+  postgres:
+    driver: local
