@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    database: postgresql 
+    database-platform: org.hibernate.dialect.PostgreSQLDialect # Aynı şekilde sola alındı
+    properties:
+      hibernate:
+        '[format_sql]': true
+  flyway:
+    enabled: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/talkflow
+  servlet:
+    multipart:
+      max-file-size: 500MB
+
+application:
+  file:
+    uploads:
+      media-output-path: ./upload
