@@ -1,5 +1,6 @@
-package com.yavuzahmet.talkflow.chat;
+package com.yavuzahmet.talkflow.message;
 
+import com.yavuzahmet.talkflow.chat.Chat;
 import com.yavuzahmet.talkflow.common.BaseAuditingEntity;
 
 import jakarta.persistence.Column;
@@ -11,6 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedNativeQueries;
+import jakarta.persistence.NamedNativeQuery;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -24,6 +28,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "messages")
+@NamedNativeQuery(name = MessageConstants.FIND_MESSAGES_BY_CHAT_ID, query = "SELECT m FROM messages m WHERE m.chat.id = :chatId")
+@NamedQuery(name = MessageConstants.SET_MESSAGES_TO_SEEN_BY_CHAT, query = "UPDATE Message m SET m.state = :newState WHERE m.chat.id = :chatId")
 public class Message extends BaseAuditingEntity {
 
     @Id
