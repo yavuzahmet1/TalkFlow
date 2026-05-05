@@ -1,4 +1,4 @@
-package com.yavuzahmet.talkflow.chat;
+package com.yavuzahmet.talkflow.message;
 
 public enum MessageState {
     SENT,
