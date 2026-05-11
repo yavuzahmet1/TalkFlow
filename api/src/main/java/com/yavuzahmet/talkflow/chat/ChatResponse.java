@@ -20,5 +20,8 @@ public class ChatResponse {
     private Long unreadCount;
     private String lastMessage;
     private LocalDateTime lastMessageTime;
+    private boolean isRecipientOnline;
+    private String senderId;
+    private String receiverId;
 
 }
