@@ -4,23 +4,26 @@ import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ChatService {
 
     private final ChatRepository chatRepository;
+    private final ChatMapper mapper;
 
-    public ChatService(ChatRepository chatRepository) {
+    public ChatService(ChatRepository chatRepository, ChatMapper mapper) {
         this.chatRepository = chatRepository;
+        this.mapper = mapper;
     }
 
     @Transactional(readOnly = true)
-    public List<ChatResponse> getChatsByRecieverId(Authentication currentUser) {
+    public List<ChatResponse> getChatsBySenderId(Authentication currentUser) {
+        final String userId = currentUser.getName();
 
-        String recieverId = currentUser.getName();
-        return chatRepository.findByRecieverId(recieverId);
+        return chatRepository.findChatsBySenderId(userId)
+                .stream()
+                .map(chat -> mapper.toChatResponse(chat, userId))
+                .toList();
     }
-
 }
